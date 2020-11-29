@@ -37,16 +37,18 @@ public class TetrisBlock : MonoBehaviour
             }
         }
         tickTime += Time.deltaTime;
-        if (tickTime > (Input.GetKey(KeyCode.DownArrow) ? maxTickTime / 10 : maxTickTime)
-            && ValidPosition(PositionChangeType.Down))
+        if (tickTime > (Input.GetKey(KeyCode.DownArrow) ? maxTickTime / 10 : maxTickTime))
         {
-            tickTime = 0;
-            transform.position += Vector3.down;
-        }
-        else if (tickTime > (Input.GetKey(KeyCode.DownArrow) ? maxTickTime / 10 : maxTickTime))
-        {
-            this.enabled = false;
-            SpawnBlocks.Instance.SpawnBlock();
+            if (ValidPosition(PositionChangeType.Down))
+            {
+                tickTime = 0;
+                transform.position += Vector3.down;
+            }
+            else
+            {
+                this.enabled = false;
+                SpawnBlocks.Instance.SpawnBlock();
+            }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
